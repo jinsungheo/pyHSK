@@ -1,0 +1,48 @@
+
+
+# Mission : 다음 os 명령을 수행하여 생성된 txt 파일을 읽어 평균 응답 속도(ms)를 계산하여 출력하시오.
+
+f= open("out.txt",'r')                                           # open file to read
+
+n=0                                                              # number of total input
+total=0                                                          # value for result
+
+while True:
+    line = f.readline()
+    if not line:
+        break                                                    # to exit condition in while loop
+
+    mylist=line.split(" ")                                       # separate line and create list data type
+
+    if 'bytes' in mylist:       
+        n=n+1
+        char_time=mylist[6]                                     # to get time field (time=39.171)
+        total = total + float(char_time[5:])                    # add time value
+        print('#',n , "sum = ",total ,"average = ",total/n)
+
+f.close()
+
+
+
+"""
+[ SAMPLE INPUT ]
+baigejinui-iMac:Python baige.jin$ cat out.txt
+PING www.google.com (216.58.196.228): 56 data bytes
+64 bytes from 216.58.196.228: icmp_seq=0 ttl=51 time=39.171 ms
+64 bytes from 216.58.196.228: icmp_seq=1 ttl=51 time=39.166 ms
+64 bytes from 216.58.196.228: icmp_seq=2 ttl=51 time=39.212 ms
+64 bytes from 216.58.196.228: icmp_seq=3 ttl=51 time=39.007 ms
+64 bytes from 216.58.196.228: icmp_seq=4 ttl=51 time=38.818 ms
+
+--- www.google.com ping statistics ---
+5 packets transmitted, 5 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 38.818/39.075/39.212/0.146 ms
+
+[ SAMPLE OUTPUT ]
+# 1 sum =  39.171 average =  39.171
+# 2 sum =  78.33699999999999 average =  39.168499999999995
+# 3 sum =  117.54899999999999 average =  39.183
+# 4 sum =  156.55599999999998 average =  39.138999999999996
+# 5 sum =  195.37399999999997 average =  39.074799999999996
+
+"""
